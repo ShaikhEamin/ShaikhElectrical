@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shaikh — Electronic Engineer | IoT · Embedded Systems · Python · MATLAB</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #060a0e;
+  --surface: #0b1318;
+  --surface2: #101c24;
+  --border: #182530;
+  --border2: #1f3040;
+  --accent: #00c8f0;
+  --accent2: #00e890;
+  --accent3: #f0a800;
+  --accent4: #e055ff;
+  --text: #deeaf2;
+  --muted: #5a7a8a;
+  --card: #0b1520;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(0,200,240,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,240,0.03) 1px,transparent 1px);
+  background-size:50px 50px;pointer-events:none;z-index:0;
+}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px 100px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(6,10,14,0.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 28px;}
+.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.5px;}
+.nav-brand span{color:var(--accent);}
+.nav-links{display:flex;gap:28px;list-style:none;font-size:12px;font-family:'Space Mono',monospace;letter-spacing:0.5px;}
+.nav-links a{color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta{background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;padding:9px 22px;border-radius:3px;text-decoration:none;transition:all 0.2s;}
+.nav-cta:hover{background:#33d4f5;transform:translateY(-1px);}
+
+/* HERO */
+.hero{padding:80px 0 64px;display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:center;border-bottom:1px solid var(--border);}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2);background:rgba(0,232,144,0.08);border:1px solid rgba(0,232,144,0.2);padding:5px 14px;border-radius:2px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;}
+.hero-badge::before{content:'';width:7px;height:7px;background:var(--accent2);border-radius:50%;animation:blink 2s infinite;}
+.hero-name{font-family:'Syne',sans-serif;font-size:clamp(56px,8vw,92px);font-weight:800;line-height:0.92;letter-spacing:-3px;margin-bottom:14px;}
+.hero-name .ghost{color:transparent;-webkit-text-stroke:1.5px rgba(0,200,240,0.35);}
+.hero-name .dot{color:var(--accent);}
+.hero-role{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;}
+.hero-intro{font-size:16px;color:#7fa0b5;line-height:1.82;max-width:520px;margin-bottom:32px;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-family:'Space Mono',monospace;font-size:11px;padding:5px 12px;border-radius:2px;border:1px solid var(--border2);color:var(--muted);background:var(--card);}
+.tag.a{border-color:rgba(0,200,240,0.35);color:var(--accent);}
+.tag.b{border-color:rgba(0,232,144,0.3);color:var(--accent2);}
+.tag.c{border-color:rgba(240,168,0,0.3);color:var(--accent3);}
+
+/* Hero Photo */
+.hero-photo-col{position:relative;}
+.hero-photo-frame{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border2);aspect-ratio:3/4;}
+.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:brightness(0.92) saturate(1.1);}
+.hero-photo-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, transparent 60%, rgba(6,10,14,0.7));}
+.hero-photo-overlay{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px 18px;}
+.hpo-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:2px;}
+.hpo-title{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.55);letter-spacing:1px;}
+.hero-badge-float{position:absolute;top:-14px;right:-14px;background:var(--surface2);border:1px solid rgba(0,200,240,0.3);border-top:3px solid var(--accent);padding:12px 16px;border-radius:4px;z-index:3;text-align:center;}
+.hbf-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);line-height:1;}
+.hbf-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
+.hero-accent-line{position:absolute;bottom:-12px;left:-12px;width:40px;height:40px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);border-radius:0 0 0 4px;z-index:3;}
+
+/* STATS */
+.stats-band{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:56px;}
+.stat-item{background:var(--card);padding:28px 20px;text-align:center;position:relative;overflow:hidden;}
+.stat-item::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.stat-item:nth-child(1)::after{background:var(--accent);}
+.stat-item:nth-child(2)::after{background:var(--accent2);}
+.stat-item:nth-child(3)::after{background:var(--accent3);}
+.stat-item:nth-child(4)::after{background:var(--accent4);}
+.stat-big{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;}
+.stat-big sup{font-size:20px;vertical-align:top;margin-top:8px;color:var(--accent);}
+.stat-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+
+/* SECTIONS */
+.section{padding:72px 0 0;}
+.sec-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-1px;margin-bottom:36px;color:var(--text);}
+.sec-title span{color:var(--accent);}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.about-photo-wrap{position:relative;}
+.about-photo-main{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid var(--border2);display:block;filter:brightness(0.9);}
+.about-photo-mini{position:absolute;bottom:-20px;right:-20px;width:140px;height:100px;object-fit:cover;border-radius:4px;border:3px solid var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.5);}
+.about-caption{margin-top:14px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
+.about-text p{font-size:15px;color:#7fa0b5;line-height:1.85;margin-bottom:18px;}
+.about-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+.about-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text);line-height:1.5;}
+.about-list li::before{content:'▸';color:var(--accent);flex-shrink:0;margin-top:2px;}
+
+/* SKILLS */
+.skills-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.skill-group-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.skill-bar-item{margin-bottom:18px;}
+.skill-bar-top{display:flex;justify-content:space-between;margin-bottom:7px;}
+.skill-bar-name{font-size:14px;font-weight:500;color:var(--text);}
+.skill-bar-pct{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);}
+.skill-bar-track{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.skill-bar-fill{height:100%;border-radius:2px;animation:grow 1.4s ease both;}
+.f-cyan{background:linear-gradient(90deg,var(--accent),rgba(0,200,240,0.3));}
+.f-green{background:linear-gradient(90deg,var(--accent2),rgba(0,232,144,0.3));}
+.f-orange{background:linear-gradient(90deg,var(--accent3),rgba(240,168,0,0.3));}
+@keyframes grow{from{width:0}to{width:var(--w)}}
+
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:10px;margin-top:36px;}
+.tool-chip{background:var(--card);border:1px solid var(--border2);padding:10px 14px;border-radius:3px;font-size:12.5px;font-weight:500;text-align:center;color:var(--muted);transition:all 0.2s;cursor:default;}
+.tool-chip:hover{border-color:var(--accent);color:var(--text);background:rgba(0,200,240,0.04);}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:transform 0.25s,border-color 0.25s;}
+.proj-card:hover{transform:translateY(-5px);border-color:var(--border2);}
+.proj-img-wrap{position:relative;overflow:hidden;aspect-ratio:16/10;}
+.proj-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;filter:brightness(0.88)saturate(1.05);}
+.proj-card:hover .proj-img-wrap img{transform:scale(1.06);}
+.proj-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(6,10,14,0.5));pointer-events:none;}
+.proj-body{padding:20px;}
+.proj-cat{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.pc1{color:var(--accent)}.pc2{color:var(--accent2)}.pc3{color:var(--accent3)}.pc4{color:var(--accent4)}
+.proj-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.3;}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.proj-tag{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);}
+
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:210px 210px;gap:12px;}
+.gi{border-radius:6px;overflow:hidden;border:1px solid var(--border);position:relative;cursor:pointer;}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;filter:brightness(0.85)saturate(1.1);}
+.gi:hover img{transform:scale(1.07);}
+.gi.tall{grid-row:span 2;}
+.gi-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(6,10,14,0.88));padding:18px 14px 12px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;}
+
+/* PROCESS */
+.process-track{display:grid;grid-template-columns:repeat(5,1fr);position:relative;gap:0;}
+.process-track::before{content:'';position:absolute;top:35px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,var(--border2),var(--accent),var(--border2));z-index:0;}
+.process-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 10px;position:relative;z-index:1;}
+.step-circle{width:70px;height:70px;border-radius:50%;background:var(--card);border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:var(--accent);margin-bottom:18px;transition:border-color 0.2s,background 0.2s;}
+.process-step:hover .step-circle{border-color:var(--accent);background:rgba(0,200,240,0.06);}
+.step-title{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* SERVICES */
+.services-list{display:flex;flex-direction:column;gap:14px;}
+.svc-row{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:28px 30px;display:grid;grid-template-columns:64px 1fr auto;gap:28px;align-items:center;transition:border-color 0.2s,transform 0.2s;}
+.svc-row:hover{border-color:var(--border2);transform:translateX(4px);}
+.svc-icon{width:60px;height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
+.si1{background:rgba(0,200,240,0.1);}.si2{background:rgba(0,232,144,0.08);}.si3{background:rgba(240,168,0,0.08);}.si4{background:rgba(224,85,255,0.08);}
+.svc-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.svc-desc{font-size:13.5px;color:var(--muted);line-height:1.65;max-width:580px;}
+.svc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.svc-chip{font-family:'Space Mono',monospace;font-size:10px;padding:3px 9px;border-radius:2px;border:1px solid var(--border2);color:var(--muted);}
+.svc-price{text-align:right;flex-shrink:0;}
+.svc-price-from{font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px;text-transform:uppercase;}
+.svc-price-num{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent);line-height:1;margin-top:3px;}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:32px;position:relative;overflow:hidden;}
+.testi-card::before{content:'"';position:absolute;top:16px;right:22px;font-family:'Syne',sans-serif;font-size:90px;line-height:1;opacity:0.06;color:var(--accent);}
+.testi-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;}
+.testi-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--border2);flex-shrink:0;}
+.testi-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);}
+.testi-role{font-size:12px;color:var(--muted);margin-top:2px;}
+.testi-stars{color:var(--accent3);font-size:12px;letter-spacing:2px;margin-top:5px;}
+.testi-text{font-size:14px;color:#7fa0b5;line-height:1.82;}
+.testi-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
+.testi-foot::before{content:'▸';color:var(--accent);}
+
+/* CTA */
+.cta-section{margin-top:72px;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:72px 48px;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,240,0.07),transparent 65%);pointer-events:none;}
+.cta-eyebrow{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(30px,5vw,54px);font-weight:800;letter-spacing:-1.5px;margin-bottom:14px;}
+.cta-sub{font-size:16px;color:var(--muted);max-width:500px;margin:0 auto 36px;line-height:1.7;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;padding:14px 34px;border-radius:3px;text-decoration:none;letter-spacing:0.3px;transition:all 0.2s;}
+.btn-primary:hover{background:#33d4f5;transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:var(--text);font-family:'Syne',sans-serif;font-weight:700;font-size:15px;padding:14px 34px;border-radius:3px;text-decoration:none;border:1px solid var(--border2);letter-spacing:0.3px;transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+
+/* FOOTER */
+footer{margin-top:72px;padding-top:32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;margin-bottom:4px;}
+.footer-brand span{color:var(--accent);}
+.footer-tagline{font-size:12.5px;color:var(--muted);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color 0.2s;}
+.footer-links a:hover{color:var(--accent);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.anim{animation:fadeUp 0.7s ease both;}
+
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;}
+  .hero-photo-col{display:none;}
+  .stats-band{grid-template-columns:repeat(2,1fr);}
+  .about-grid{grid-template-columns:1fr;}
+  .skills-cols{grid-template-columns:1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .process-track{grid-template-columns:1fr 1fr;gap:24px;}
+  .process-track::before{display:none;}
+  .svc-row{grid-template-columns:1fr;}
+  .svc-price{text-align:left;}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .gi.tall{grid-row:span 1;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">Shaikh<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#services">Services</a></li>
+    </ul>
+    <a class="nav-cta" href="https://www.upwork.com" target="_blank">Hire Me on Upwork →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- HERO -->
+<section class="hero anim">
+  <div>
+    <div class="hero-badge">🟢 Available for Projects</div>
+    <h1 class="hero-name">
+      Shaikh<span class="dot">.</span><br>
+      <span class="ghost">Engineer</span>
+    </h1>
+    <p class="hero-role">Electronic Engineer · IoT · Embedded Systems · Python · MATLAB</p>
+    <p class="hero-intro">
+      I design and build precision-engineered solutions across IoT, embedded hardware,
+      Python automation, and renewable energy systems. Trusted by clients worldwide
+      for on-time delivery, clean code, and documentation that actually makes sense.
+    </p>
+    <div class="hero-tags">
+      <span class="tag a">IoT Development</span>
+      <span class="tag b">Embedded Systems</span>
+      <span class="tag c">Python · MATLAB</span>
+      <span class="tag a">Circuit Design</span>
+      <span class="tag b">Solar Energy</span>
+      <span class="tag c">Smart Monitoring</span>
+    </div>
+  </div>
+  <div class="hero-photo-col">
+    <div class="hero-badge-float">
+      <div class="hbf-num">5.0★</div>
+      <div class="hbf-label">Upwork Rating</div>
+    </div>
+    <div class="hero-photo-frame">
+      <!-- Real photo: male engineer/professional from Pexels -->
+      <img
+        src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=400&h=540&fit=crop"
+        alt="Shaikh — Electronic Engineer"
+        onerror="this.src='https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=400&h=540&fit=crop&crop=face'"
+      />
+      <div class="hero-photo-overlay"></div>
+      <div class="hero-photo-overlay" style="position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(transparent,rgba(6,10,14,0.85));z-index:1;"></div>
+      <div class="hero-photo-overlay" style="position:absolute;bottom:16px;left:16px;z-index:2;">
+        <div class="hpo-name">Shaikh</div>
+        <div class="hpo-title">Electronic Engineer · IoT Specialist</div>
+      </div>
+    </div>
+    <div class="hero-accent-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat-item">
+    <div class="stat-big">5.0<sup>★</sup></div>
+    <div class="stat-sub">Client Rating</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-big">100<sup>%</sup></div>
+    <div class="stat-sub">Job Success Score</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-big">On<br>Time</div>
+    <div class="stat-sub">Every Delivery</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-big">Top<br>Rated</div>
+    <div class="stat-sub">Freelancer Badge</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section anim" id="about">
+  <div class="sec-label">// 01 — About Me</div>
+  <div class="sec-title">Engineer. Problem Solver.<br><span>Builder of Smart Systems.</span></div>
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <!-- Real electronics engineering lab photo -->
+      <img class="about-photo-main"
+        src="https://images.pexels.com/photos/3912981/pexels-photo-3912981.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop"
+        alt="Electronics lab workbench"
+        onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=700&h=500&fit=crop'"
+      />
+      <!-- Real PCB / circuit board closeup -->
+      <img class="about-photo-mini"
+        src="https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=280&h=200&fit=crop"
+        alt="PCB circuit board"
+        onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=280&h=200&fit=crop'"
+      />
+      <div class="about-caption">// Engineering Lab & PCB Design Work</div>
+    </div>
+    <div class="about-text">
+      <p>I'm a professional Electronic Engineer with deep hands-on expertise in IoT, Embedded Systems, Python automation, and MATLAB simulation. I bring real-world engineering experience to every project — from initial circuit schematic to final deployed system.</p>
+      <p>My work spans <strong style="color:var(--text)">renewable energy, industrial automation, smart infrastructure,</strong> and remote monitoring. I've delivered end-to-end engineering projects for clients across the globe through Upwork, consistently earning 5-star reviews for precision and professionalism.</p>
+      <ul class="about-list">
+        <li>Electronic Engineering background with IoT specialisation</li>
+        <li>Expert in Raspberry Pi, Arduino, ESP32 & STM32 platforms</li>
+        <li>Solar energy systems design & smart monitoring integration</li>
+        <li>Clean, well-documented code and technical report writing</li>
+        <li>MATLAB modelling, Simulink simulation & data analysis</li>
+        <li>Strong client communication and seamless project handover</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section anim" id="skills">
+  <div class="sec-label">// 02 — Skills & Expertise</div>
+  <div class="sec-title">What I <span>Bring</span> to Your Project</div>
+  <div class="skills-cols">
+    <div>
+      <div class="skill-group-title">Hardware & Systems</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">IoT System Design</span><span class="skill-bar-pct">97%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-cyan" style="--w:97%"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">Embedded Systems (ARM / AVR)</span><span class="skill-bar-pct">95%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-cyan" style="--w:95%"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">Circuit Design & PCB Layout</span><span class="skill-bar-pct">90%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-cyan" style="--w:90%"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">Solar & Renewable Energy</span><span class="skill-bar-pct">88%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-cyan" style="--w:88%"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">Smart Monitoring Systems</span><span class="skill-bar-pct">93%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-cyan" style="--w:93%"></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-title">Software & Programming</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">Python Scripting & Automation</span><span class="skill-bar-pct">96%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-green" style="--w:96%"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">MATLAB / Simulink</span><span class="skill-bar-pct">92%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-green" style="--w:92%"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">C / C++ Firmware</span><span class="skill-bar-pct">89%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-green" style="--w:89%"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">Technical Documentation</span><span class="skill-bar-pct">98%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-orange" style="--w:98%"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span class="skill-bar-name">System Integration</span><span class="skill-bar-pct">94%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill f-green" style="--w:94%"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-chip">Raspberry Pi</div>
+    <div class="tool-chip">Arduino</div>
+    <div class="tool-chip">ESP32 / ESP8266</div>
+    <div class="tool-chip">STM32 / ARM</div>
+    <div class="tool-chip">MQTT Protocol</div>
+    <div class="tool-chip">Node-RED</div>
+    <div class="tool-chip">KiCad / Altium</div>
+    <div class="tool-chip">MATLAB</div>
+    <div class="tool-chip">Simulink</div>
+    <div class="tool-chip">Python 3</div>
+    <div class="tool-chip">NumPy / Pandas</div>
+    <div class="tool-chip">Modbus / RS485</div>
+    <div class="tool-chip">LoRaWAN</div>
+    <div class="tool-chip">AWS IoT</div>
+    <div class="tool-chip">Proteus / LTSpice</div>
+    <div class="tool-chip">FreeRTOS</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section anim" id="projects">
+  <div class="sec-label">// 03 — Featured Projects</div>
+  <div class="sec-title">Engineering Work <span>In Action</span></div>
+  <div class="projects-grid">
+
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <!-- Real solar panel monitoring photo from Pexels -->
+        <img src="https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop"
+             alt="Solar Smart Monitoring"
+             onerror="this.src='https://images.pexels.com/photos/1252506/pexels-photo-1252506.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop'"/>
+        <div class="proj-img-overlay"></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat pc2">Solar Energy · IoT</div>
+        <div class="proj-title">Solar Panel Smart Monitoring System</div>
+        <div class="proj-desc">Real-time IoT monitoring for a solar company — tracking voltage, current, temperature across multiple panels with cloud dashboard and automated alerts.</div>
+        <div class="proj-tags"><span class="proj-tag">ESP32</span><span class="proj-tag">Python</span><span class="proj-tag">MQTT</span><span class="proj-tag">Dashboard</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <!-- Real embedded systems / industrial electronics photo -->
+        <img src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop"
+             alt="Embedded Systems Controller"
+             onerror="this.src='https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop'"/>
+        <div class="proj-img-overlay"></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat pc1">Embedded Systems</div>
+        <div class="proj-title">Industrial Automation Controller</div>
+        <div class="proj-desc">STM32-based embedded controller for automated industrial process management with PID control, sensor fusion, Modbus communication, and data logging.</div>
+        <div class="proj-tags"><span class="proj-tag">STM32</span><span class="proj-tag">C/C++</span><span class="proj-tag">Modbus</span><span class="proj-tag">PID</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <!-- Real data analysis / laptop coding photo -->
+        <img src="https://images.pexels.com/photos/574069/pexels-photo-574069.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop"
+             alt="MATLAB Python Analysis"
+             onerror="this.src='https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop'"/>
+        <div class="proj-img-overlay"></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat pc3">Python · MATLAB</div>
+        <div class="proj-title">Power Grid Data Analysis Tool</div>
+        <div class="proj-desc">MATLAB + Python hybrid tool for power system analysis, load forecasting, and anomaly detection with interactive visualizations and automated PDF reports.</div>
+        <div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">Python</span><span class="proj-tag">Simulink</span><span class="proj-tag">Automation</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <!-- Real PCB / circuit board photo -->
+        <img src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop"
+             alt="PCB Circuit Design"
+             onerror="this.src='https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop'"/>
+        <div class="proj-img-overlay"></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat pc4">Circuit Design · PCB</div>
+        <div class="proj-title">Custom IoT Sensor PCB Design</div>
+        <div class="proj-desc">Compact low-power PCB for an IoT environmental sensor node — including schematic design, PCB layout, BOM list, and Gerber file delivery with full documentation.</div>
+        <div class="proj-tags"><span class="proj-tag">KiCad</span><span class="proj-tag">PCB Layout</span><span class="proj-tag">Low Power</span><span class="proj-tag">BOM</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <!-- Real Python automation / hardware testing -->
+        <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop"
+             alt="Python Automation Testing"
+             onerror="this.src='https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop'"/>
+        <div class="proj-img-overlay"></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat pc2">Python · Automation</div>
+        <div class="proj-title">Hardware-in-Loop Test Automation</div>
+        <div class="proj-desc">Python-based automated testing framework for embedded hardware validation — serial communication, GPIO control, pass/fail logic, and HTML test report generation.</div>
+        <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Serial</span><span class="proj-tag">GPIO</span><span class="proj-tag">Test Reports</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <!-- Real wind farm / renewable energy photo -->
+        <img src="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop"
+             alt="Wind Farm Remote Monitor"
+             onerror="this.src='https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg?auto=compress&cs=tinysrgb&w=600&h=375&fit=crop'"/>
+        <div class="proj-img-overlay"></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat pc3">Renewable Energy · LoRa</div>
+        <div class="proj-title">Remote Wind Farm Monitor</div>
+        <div class="proj-desc">LoRaWAN-based remote monitoring system for wind turbine performance tracking. Designed for off-grid deployment with solar-powered gateway and AWS IoT backend.</div>
+        <div class="proj-tags"><span class="proj-tag">LoRaWAN</span><span class="proj-tag">AWS IoT</span><span class="proj-tag">ESP32</span><span class="proj-tag">Off-Grid</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section anim">
+  <div class="sec-label">// 04 — Engineering in Practice</div>
+  <div class="sec-title">From Schematic <span>to Reality</span></div>
+  <div class="gallery-grid">
+    <div class="gi tall">
+      <!-- Real engineer at workbench with electronics -->
+      <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=700&h=440&fit=crop"
+           alt="Electronics engineering workbench"
+           onerror="this.src='https://images.pexels.com/photos/3912981/pexels-photo-3912981.jpeg?auto=compress&cs=tinysrgb&w=700&h=440&fit=crop'"/>
+      <div class="gi-label">// Embedded Systems & PCB Development</div>
+    </div>
+    <div class="gi">
+      <!-- PCB close up -->
+      <img src="https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=400&h=210&fit=crop"
+           alt="PCB circuit board"
+           onerror="this.src='https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=400&h=210&fit=crop'"/>
+      <div class="gi-label">// PCB Design</div>
+    </div>
+    <div class="gi">
+      <!-- Solar panels field -->
+      <img src="https://images.pexels.com/photos/1252506/pexels-photo-1252506.jpeg?auto=compress&cs=tinysrgb&w=400&h=210&fit=crop"
+           alt="Solar energy panels"
+           onerror="this.src='https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg?auto=compress&cs=tinysrgb&w=400&h=210&fit=crop'"/>
+      <div class="gi-label">// Solar Energy Systems</div>
+    </div>
+    <div class="gi">
+      <!-- Python / coding screen -->
+      <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=400&h=210&fit=crop"
+           alt="Python coding"
+           onerror="this.src='https://images.pexels.com/photos/574069/pexels-photo-574069.jpeg?auto=compress&cs=tinysrgb&w=400&h=210&fit=crop'"/>
+      <div class="gi-label">// Python & MATLAB</div>
+    </div>
+    <div class="gi">
+      <!-- IoT hardware / microcontroller -->
+      <img src="https://images.pexels.com/photos/1174043/pexels-photo-1174043.jpeg?auto=compress&cs=tinysrgb&w=400&h=210&fit=crop"
+           alt="IoT hardware modules"
+           onerror="this.src='https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=400&h=210&fit=crop'"/>
+      <div class="gi-label">// IoT Hardware Integration</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section anim">
+  <div class="sec-label">// 05 — How I Work</div>
+  <div class="sec-title">My Project <span>Process</span></div>
+  <div class="process-track">
+    <div class="process-step">
+      <div class="step-circle">01</div>
+      <div class="step-title">Discovery</div>
+      <div class="step-desc">Understanding your requirements, constraints, and project goals in detail</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">02</div>
+      <div class="step-title">Planning</div>
+      <div class="step-desc">Architecture decisions, tech stack selection, milestones and timeline</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">03</div>
+      <div class="step-title">Design</div>
+      <div class="step-desc">Circuit schematics, firmware architecture, or system design proposal</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">04</div>
+      <div class="step-title">Build & Test</div>
+      <div class="step-desc">Development with iterative testing, debugging, and client check-ins</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">05</div>
+      <div class="step-title">Handover</div>
+      <div class="step-desc">Clean documentation, source files, and full knowledge transfer</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section anim" id="services">
+  <div class="sec-label">// 06 — Services</div>
+  <div class="sec-title">What You Get <span>When You Hire Me</span></div>
+  <div class="services-list">
+    <div class="svc-row">
+      <div class="svc-icon si1">🔌</div>
+      <div>
+        <div class="svc-title">IoT System Design & Development</div>
+        <div class="svc-desc">Complete IoT solutions from hardware selection and firmware development to cloud connectivity and dashboard setup. I handle the full stack — sensor, gateway, protocol, and platform.</div>
+        <div class="svc-chips">
+          <span class="svc-chip">ESP32 / ESP8266</span><span class="svc-chip">Raspberry Pi</span><span class="svc-chip">MQTT / HTTP</span><span class="svc-chip">LoRaWAN</span><span class="svc-chip">AWS IoT / Azure</span><span class="svc-chip">Node-RED</span>
+        </div>
+      </div>
+      <div class="svc-price"><div class="svc-price-from">Starting from</div><div class="svc-price-num">$150</div></div>
+    </div>
+    <div class="svc-row">
+      <div class="svc-icon si2">🖥️</div>
+      <div>
+        <div class="svc-title">Embedded Systems Engineering</div>
+        <div class="svc-desc">Microcontroller firmware, RTOS integration, peripheral drivers, and custom embedded software for ARM Cortex, AVR, and PIC platforms — optimised for reliability and low power.</div>
+        <div class="svc-chips">
+          <span class="svc-chip">STM32 / ARM</span><span class="svc-chip">Arduino</span><span class="svc-chip">C / C++</span><span class="svc-chip">FreeRTOS</span><span class="svc-chip">SPI / I2C / UART</span>
+        </div>
+      </div>
+      <div class="svc-price"><div class="svc-price-from">Starting from</div><div class="svc-price-num">$120</div></div>
+    </div>
+    <div class="svc-row">
+      <div class="svc-icon si3">🐍</div>
+      <div>
+        <div class="svc-title">Python Scripting & MATLAB Analysis</div>
+        <div class="svc-desc">Custom Python automation scripts, data processing pipelines, hardware interfacing, and MATLAB simulations for engineering analysis, modelling, and automated reporting.</div>
+        <div class="svc-chips">
+          <span class="svc-chip">Python 3</span><span class="svc-chip">NumPy / Pandas</span><span class="svc-chip">MATLAB</span><span class="svc-chip">Simulink</span><span class="svc-chip">Serial / GPIO</span>
+        </div>
+      </div>
+      <div class="svc-price"><div class="svc-price-from">Starting from</div><div class="svc-price-num">$80</div></div>
+    </div>
+    <div class="svc-row">
+      <div class="svc-icon si4">☀️</div>
+      <div>
+        <div class="svc-title">Solar & Renewable Energy Engineering</div>
+        <div class="svc-desc">Specialised engineering for solar, wind, and renewable energy projects — smart monitoring systems, MPPT design, energy storage integration, and performance analytics.</div>
+        <div class="svc-chips">
+          <span class="svc-chip">Solar PV Systems</span><span class="svc-chip">MPPT</span><span class="svc-chip">Smart Monitoring</span><span class="svc-chip">Energy Storage</span><span class="svc-chip">Grid Analysis</span>
+        </div>
+      </div>
+      <div class="svc-price"><div class="svc-price-from">Starting from</div><div class="svc-price-num">$200</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section anim" id="reviews">
+  <div class="sec-label">// 07 — Client Reviews</div>
+  <div class="sec-title">What Clients <span>Say</span></div>
+  <div class="testi-grid">
+
+    <div class="testi-card">
+      <div class="testi-top">
+        <!-- Real professional headshot from Pexels -->
+        <img class="testi-avatar"
+          src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop&crop=face"
+          alt="James R."
+          onerror="this.src='https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop&crop=face'"/>
+        <div>
+          <div class="testi-name">James R.</div>
+          <div class="testi-role">Tech Startup Founder · United States</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+      <p class="testi-text">
+        "Working with Shaikh was one of the best decisions I made for my project. He is a highly skilled Electronic Engineer with deep expertise in IoT, Embedded Systems, Python, and MATLAB — exactly what my project demanded. He delivered precise, well-documented, and reliable engineering solutions on time and well within budget. His attention to detail and problem-solving approach set him apart from every other freelancer I've worked with."
+      </p>
+      <div class="testi-foot">IoT & Embedded Systems Project</div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-top">
+        <!-- Real professional headshot from Pexels -->
+        <img class="testi-avatar"
+          src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop&crop=face"
+          alt="Mohammed A."
+          onerror="this.src='https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop&crop=face'"/>
+        <div>
+          <div class="testi-name">Mohammed A.</div>
+          <div class="testi-role">Solar Energy Company · Middle East</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+      <p class="testi-text">
+        "We hired Shaikh for our solar energy company and he exceeded every expectation. His expertise in smart monitoring and circuit design added real value to our solar operations. His professionalism, clear communication, and on-time delivery within budget truly stood out. His well-structured documentation made implementation and handover seamless for our entire team. We will not hesitate to hire him again."
+      </p>
+      <div class="testi-foot">Solar Energy Smart Monitoring System</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section anim">
+  <div class="cta-eyebrow">🟢 Currently Available — Accepting New Projects</div>
+  <h2 class="cta-title">Let's Build Something<br>Exceptional Together</h2>
+  <p class="cta-sub">Whether it's IoT hardware, embedded firmware, Python automation, or renewable energy engineering — I bring precision, professionalism, and results to every project.</p>
+  <div class="cta-btns">
+    <a class="btn-primary" href="https://www.upwork.com" target="_blank">Hire Me on Upwork →</a>
+    <a class="btn-secondary" href="https://www.upwork.com" target="_blank">View Full Profile</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Shaikh<span>.</span></div>
+    <div class="footer-tagline">Electronic Engineer · IoT Specialist · Upwork Top Rated Freelancer</div>
+  </div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#reviews">Reviews</a>
+    <a href="https://www.upwork.com" target="_blank">Upwork →</a>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
